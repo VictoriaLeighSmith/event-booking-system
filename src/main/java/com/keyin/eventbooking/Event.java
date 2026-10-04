@@ -53,6 +53,12 @@ public class Event {
     }
 
     public boolean isRegistered(Attendee attendee) {
-        return attendees.contains(attendee);
+        for (Attendee registeredAttendee : attendees) {
+            if (registeredAttendee.getEmail().equals(attendee.getEmail())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
