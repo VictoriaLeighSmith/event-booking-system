@@ -7,6 +7,7 @@ import java.time.LocalDate;
 
 public class EventTest {
 
+    // Capacity tests
     @Test
     public void notFullWhenSpaceAvailable() {
         Event event = new Event("Small Halloween Party", LocalDate.of(2026, 10, 31), 2);
@@ -31,6 +32,7 @@ public class EventTest {
         Assertions.assertTrue(event.isFull());
     }
 
+    // Registration tests
     @Test
     public void preventDuplicateRegistration() {
         Event event = new Event("Annual Procrastinators Conference", LocalDate.of(2026, 11, 20), 300);
@@ -71,6 +73,7 @@ public class EventTest {
         Assertions.assertTrue(event.registerAttendee(attendee3));
     }
 
+    // Cancellation tests
     @Test
     public void cancelsRegisteredAttendee() {
         Event event = new Event("Annual Procrastinators Conference", LocalDate.of(2026, 11, 20), 300);
