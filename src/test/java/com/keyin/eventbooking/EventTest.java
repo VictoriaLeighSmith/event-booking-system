@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class EventTest {
 
     @Test
-    public void eventShouldNotBeFullWhenSpaceAvailable() {
+    public void notFullWhenSpaceAvailable() {
         Event event = new Event("Small Halloween Party", LocalDate.of(2026, 10, 31), 2);
 
         Attendee attendee1 = new Attendee("Doug Graves", "doug.graves@example.com");
@@ -19,11 +19,11 @@ public class EventTest {
     }
 
     @Test
-    public void eventShouldBeFullWhenCapacityReached() {
+    public void fullWhenCapacityReached() {
         Event event = new Event("Small Halloween Party", LocalDate.of(2026, 10, 31), 2);
 
         Attendee attendee1 = new Attendee("Doug Graves", "doug.graves@example.com");
-        Attendee attendee2 = new Attendee("Frank N. Stein", "frankn.stein@example.com");
+        Attendee attendee2 = new Attendee("Frank N. Stein", "frank.n.stein@example.com");
 
         event.registerAttendee(attendee1);
         event.registerAttendee(attendee2);
@@ -44,7 +44,7 @@ public class EventTest {
     }
 
     @Test
-    public void shouldNotRegisterAttendeeWhenAtCapacity() {
+    public void rejectRegistrationAtCapacity() {
         Event event = new Event("Beagle Convention", LocalDate.of(2026, 12, 1), 2);
 
         Attendee attendee1 = new Attendee("Bark Ruffalo", "bark.ruffalo@example.com");
@@ -58,7 +58,7 @@ public class EventTest {
     }
 
     @Test
-    public void shouldRegisterAttendeeWhenSpaceAvailable() {
+    public void registerAttendeeWhenSpaceAvailable() {
         Event event = new Event("Beagle Convention", LocalDate.of(2026, 12, 1), 3);
 
         Attendee attendee1 = new Attendee("Bark Ruffalo", "bark.ruffalo@example.com");
@@ -69,5 +69,24 @@ public class EventTest {
         event.registerAttendee(attendee2);
 
         Assertions.assertTrue(event.registerAttendee(attendee3));
+    }
+
+    @Test
+    public void cancelsRegisteredAttendee() {
+        Event event = new Event("Annual Procrastinators Conference", LocalDate.of(2026, 11, 20), 300);
+
+        Attendee attendee = new Attendee("Justin Time", "justin.time@example.com");
+        event.registerAttendee(attendee);
+
+        Assertions.assertTrue(event.cancelRegistration(attendee));
+    }
+
+    @Test
+    public void doesNotCancelUnregisteredAttendee() {
+        Event event = new Event("Annual Procrastinators Conference", LocalDate.of(2026, 11, 20), 300);
+
+        Attendee attendee = new Attendee("Justin Time", "justin.time@example.com");
+
+        Assertions.assertFalse(event.cancelRegistration(attendee));
     }
 }

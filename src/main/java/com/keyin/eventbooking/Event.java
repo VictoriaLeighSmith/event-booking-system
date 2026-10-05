@@ -41,7 +41,14 @@ public class Event {
     }
 
     public boolean cancelRegistration(Attendee attendee) {
-        return attendees.remove(attendee);
+        for (int i = 0; i < attendees.size(); i++) {
+            if (attendees.get(i).getEmail().equals(attendee.getEmail())) {
+                attendees.remove(i);
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public boolean isFull() {
