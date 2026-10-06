@@ -16,7 +16,9 @@ public class Main {
 
         while (displayMenu) {
             System.out.println();
-            System.out.println("EVENT BOOKING SYSTEM");
+            System.out.println("*".repeat(40));
+            System.out.println("*         EVENT BOOKING SYSTEM         *");
+            System.out.println("*".repeat(40));
             System.out.println();
             System.out.println("1. Create Event");
             System.out.println("2. View Event");
@@ -29,6 +31,7 @@ public class Main {
             System.out.print("Please enter your choice: ");
 
             if (!scanner.hasNextInt()) {
+                System.out.println();
                 System.out.println("Invalid choice. Please enter a number from 1-7.");
                 scanner.nextLine();
                 continue;
@@ -57,10 +60,12 @@ public class Main {
                     cancelRegistration(scanner, eventManager);
                     break;
                 case 7:
+                    System.out.println();
                     System.out.println("Exiting...");
                     displayMenu = false;
                     break;
                 default:
+                    System.out.println();
                     System.out.println("Invalid choice. Please try again.");
                     break;
             }
@@ -135,14 +140,16 @@ public class Main {
 
         System.out.println();
         System.out.println(event.getName().toUpperCase() + " DETAILS");
+        System.out.println("-".repeat(40));
         System.out.println();
         System.out.println("Event ID: " + event.getId());
         System.out.println("Event date: " + event.getDate());
         System.out.println("Event capacity: " + event.getCapacity());
-        System.out.println("Event spots available: " + event.getAvailableSpots());
+        System.out.println("Spots available: " + event.getAvailableSpots());
 
         if (event.getAttendees().isEmpty()) {
             System.out.println("Event attendees: None");
+            System.out.println();
         } else {
             System.out.println("Event attendees: ");
 
@@ -152,25 +159,34 @@ public class Main {
                 System.out.println();
             }
         }
+
+        System.out.println("-".repeat(40));
+        System.out.println();
     }
 
     private static void viewAllEvents(EventManager eventManager) {
-        System.out.println("ALL EVENTS");
         System.out.println();
+        System.out.println("ALL EVENTS");
+        System.out.println("-".repeat(40));
 
         ArrayList<Event> events = eventManager.getEvents();
 
         if (events.isEmpty()) {
+            System.out.println();
             System.out.println("No events found.");
+            System.out.println();
+            System.out.println("-".repeat(40));
             return;
         }
 
         for (Event event : events) {
+            System.out.println();
+            System.out.println(event.getName());
+            System.out.println();
             System.out.println("Event ID: " + event.getId());
-            System.out.println("Event name: "  + event.getName());
             System.out.println("Event date: " + event.getDate());
             System.out.println("Event capacity: " + event.getCapacity());
-            System.out.println("Event spots available: " + event.getAvailableSpots());
+            System.out.println("Spots available: " + event.getAvailableSpots());
 
             if (event.getAttendees().isEmpty()) {
                 System.out.println("Event attendees: None");
@@ -185,14 +201,19 @@ public class Main {
             }
 
             System.out.println();
+            System.out.println("-".repeat(20));
         }
+
+        System.out.println();
     }
 
     private static void deleteEvent(Scanner scanner, EventManager eventManager) {
         boolean displayDeleteMenu = true;
 
         while (displayDeleteMenu) {
+            System.out.println();
             System.out.println("DELETE AN EVENT");
+            System.out.println("-".repeat(40));
             System.out.println();
 
             if (eventManager.getEvents().isEmpty()) {
@@ -208,6 +229,7 @@ public class Main {
             System.out.print("Please enter the event ID to delete: ");
 
             while (!scanner.hasNextInt()) {
+                System.out.println();
                 System.out.println("Invalid choice. Please enter an event ID from the menu.");
                 scanner.nextLine();
                 System.out.print("Please enter the event ID to delete: ");
@@ -233,6 +255,7 @@ public class Main {
         Event event = eventManager.findEvent(eventId);
 
         if (event == null) {
+            System.out.println();
             System.out.println("Event not found. Please try again.");
             return;
         }
@@ -246,8 +269,10 @@ public class Main {
         Attendee attendee = new Attendee(attendeeName, attendeeEmail);
 
         if (event.registerAttendee(attendee)) {
-            System.out.println("Successfully registered!");
+            System.out.println();
+            System.out.println("Successfully registered attendee!");
         } else {
+            System.out.println();
             System.out.println("Unable to register attendee. Please try again.");
         }
     }
@@ -257,6 +282,7 @@ public class Main {
         Event event = eventManager.findEvent(eventId);
 
         if (event == null) {
+            System.out.println();
             System.out.println("Event not found. Please try again.");
             return;
         }
@@ -274,13 +300,16 @@ public class Main {
         }
 
         if (foundAttendee == null) {
+            System.out.println();
             System.out.println("Attendee not found. Please try again.");
             return;
         }
 
         if (event.cancelRegistration(foundAttendee)) {
+            System.out.println();
             System.out.println("Successfully cancelled registration!");
         } else {
+            System.out.println();
             System.out.println("Unable to cancel registration. Please try again.");
         }
     }
@@ -289,6 +318,7 @@ public class Main {
         System.out.print("Enter event ID: ");
 
         while (!scanner.hasNextInt()) {
+            System.out.println();
             System.out.println("Invalid event ID. Please enter a valid number.");
             scanner.next();
             System.out.print("Enter event ID: ");
