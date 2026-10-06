@@ -4,16 +4,24 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Event {
+    private static int nextId = 1;
+
+    private int id;
     private String name;
     private LocalDate date;
     private int capacity;
     private ArrayList<Attendee> attendees;
 
     public Event(String name, LocalDate date, int capacity) {
+        this.id = nextId++;
         this.name = name;
         this.date = date;
         this.capacity = capacity;
         this.attendees = new ArrayList<>();
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {

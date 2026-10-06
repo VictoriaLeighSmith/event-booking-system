@@ -17,13 +17,13 @@ public class EventManagerTest {
     }
 
     @Test
-    public void findsEventByName() {
+    public void findsEventById() {
         Event event = new Event("Silly Event", LocalDate.of(2026, 11, 20), 300);
         EventManager eventManager = new EventManager();
 
         eventManager.addEvent(event);
 
-        Assertions.assertEquals(event, eventManager.findEvent("Silly Event"));
+        Assertions.assertEquals(event, eventManager.findEvent(event.getId()));
     }
 
     @Test
@@ -33,7 +33,7 @@ public class EventManagerTest {
 
         eventManager.addEvent(event);
 
-        Assertions.assertNull(eventManager.findEvent("Very Serious Event"));
+        Assertions.assertNull(eventManager.findEvent(-1));
     }
 
     @Test
@@ -42,6 +42,6 @@ public class EventManagerTest {
         EventManager eventManager = new EventManager();
 
         eventManager.addEvent(event);
-        Assertions.assertTrue(eventManager.deleteEvent("Silly Event"));
+        Assertions.assertTrue(eventManager.deleteEvent(event.getId()));
     }
 }

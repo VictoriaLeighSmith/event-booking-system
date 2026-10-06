@@ -13,9 +13,9 @@ public class EventManager {
         return events.add(event);
     }
 
-    public Event findEvent(String eventName) {
+    public Event findEvent(int eventId) {
         for (Event event : events) {
-            if (event.getName().equals(eventName)) {
+            if (event.getId() == eventId) {
                 return event;
             }
         }
@@ -27,9 +27,9 @@ public class EventManager {
         return events;
     }
 
-    public boolean deleteEvent(String eventName) {
+    public boolean deleteEvent(int id) {
         for (int i = 0; i < events.size(); i++) {
-            if (events.get(i).getName().equals(eventName)) {
+            if (events.get(i).getId() == id) {
                 events.remove(i);
                 return true;
             }
