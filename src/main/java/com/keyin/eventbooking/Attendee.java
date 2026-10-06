@@ -1,7 +1,6 @@
 package com.keyin.eventbooking;
 
 public class Attendee {
-    // May need to add to this class. Just setting it up so that I can properly test the event class.
     private String name;
     private String email;
 
