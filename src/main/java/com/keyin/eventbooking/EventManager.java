@@ -27,9 +27,9 @@ public class EventManager {
         return events;
     }
 
-    public boolean deleteEvent(int id) {
+    public boolean deleteEvent(int eventId) {
         for (int i = 0; i < events.size(); i++) {
-            if (events.get(i).getId() == id) {
+            if (events.get(i).getId() == eventId) {
                 events.remove(i);
                 return true;
             }
