@@ -44,4 +44,13 @@ public class EventManagerTest {
         eventManager.addEvent(event);
         Assertions.assertTrue(eventManager.deleteEvent(event.getId()));
     }
+
+    @Test
+    public void doesNotDeleteEventThatDoesNotExist() {
+        Event event = new Event("Silly Event", LocalDate.of(2026, 11, 20), 300);
+        EventManager eventManager = new EventManager();
+
+        eventManager.addEvent(event);
+        Assertions.assertFalse(eventManager.deleteEvent(-1));
+    }
 }

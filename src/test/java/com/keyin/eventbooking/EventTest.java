@@ -32,6 +32,16 @@ public class EventTest {
         Assertions.assertTrue(event.isFull());
     }
 
+    @Test
+    public void getsAvailableSpots() {
+        Event event =  new Event("Small Halloween Party", LocalDate.of(2026, 10, 31), 2);
+
+        Attendee attendee = new Attendee("Frank N. Stein", "frank.n.stein@example.com");
+        event.registerAttendee(attendee);
+
+        Assertions.assertEquals(1, event.getAvailableSpots());
+    }
+
     // Registration tests
     @Test
     public void preventDuplicateRegistration() {
@@ -91,5 +101,17 @@ public class EventTest {
         Attendee attendee = new Attendee("Justin Time", "justin.time@example.com");
 
         Assertions.assertFalse(event.cancelRegistration(attendee));
+    }
+
+    @Test
+    public void attendeeRemovedAfterCancellation() {
+        Event event = new Event("Annual Procrastinators Conference", LocalDate.of(2026, 11, 20), 300);
+
+        Attendee attendee = new Attendee("Justin Time", "justin.time@example.com");
+
+        event.registerAttendee(attendee);
+        event.cancelRegistration(attendee);
+
+        Assertions.assertFalse(event.getAttendees().contains(attendee));
     }
 }
